@@ -10,6 +10,10 @@ const schema = a.schema({
   Patient: a
     .model({
       name: a.string(),
+      surname: a.string(),
+      dob: a.date(),
+      address: a.string(),
+      phone: a.string(),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
