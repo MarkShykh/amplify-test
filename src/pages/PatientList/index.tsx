@@ -32,18 +32,15 @@ function PatientsPage() {
     []
   );
 
+  const [measurements, setMeasurements] = useState<
+    Array<Schema["BioResults"]["type"]>
+  >([]);
+
+  const [measurementsModalOpen, setMeasurementsModalOpen] =
+    useState<boolean>(false);
+
   const [editPatientModal, setEditPatientModal] = useState<boolean>(false);
   const [patientModalOpen, setPatientModalOpen] = useState<boolean>(false);
-  const initialPatient: Patient = {
-    name: "",
-    surname: "",
-    dob: "",
-    address: "",
-    phone: "",
-    id: "",
-    createdAt: "",
-    updatedAt: "",
-  };
   const formik = useFormik<TClientInfo>({
     initialValues: {
       name: "",
@@ -58,7 +55,7 @@ function PatientsPage() {
       formik.resetForm();
     },
   });
-  const [editingPatient, setEditingPatient] = useState<Patient>(initialPatient);
+  const [editingPatient, setEditingPatient] = useState<Patient>(patients[0]);
 
   const onEditButton = (patient: Patient) => {
     setEditingPatient(patient);
@@ -284,6 +281,17 @@ function PatientsPage() {
                 </Button>
               </Col>
             </Row>
+          </ModalBody>
+        </Modal>
+      )}
+      {measurementsModalOpen && (
+        <Modal
+          isOpen={measurementsModalOpen}
+          toggle={() => setMeasurementsModalOpen(false)}
+        >
+          <ModalBody>
+            <div>{measurements[0].bloodPressure}</div>
+            <Button onClick={() => setMeasurements([])}></Button>
           </ModalBody>
         </Modal>
       )}
