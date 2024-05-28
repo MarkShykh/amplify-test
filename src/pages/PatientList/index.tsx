@@ -84,7 +84,6 @@ function PatientsPage() {
             <th>Address</th>
             <th>Phone number</th>
             <th></th>
-            <th></th>
             <th>
               <Button onClick={() => setPatientModalOpen(true)} color="success">
                 Add
@@ -123,10 +122,14 @@ function PatientsPage() {
                   </td>
                 </tr>
                 <tr>
-                  <td>{patient.bloodPressure}</td>
-                  <td>{patient.odometerValue}</td>
-                  <td>{patient.glucose}</td>
-                  <td>{patient.bpm}</td>
+                  <td>Blood pressure: {patient.bloodPressure}</td>
+                  <td>Oximeter value: {patient.odometerValue}</td>
+                  <td>Glucose level: {patient.glucose}</td>
+                  <td>Heart rate: {patient.bpm}</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               </>
             ))}
