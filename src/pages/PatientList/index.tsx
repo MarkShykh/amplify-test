@@ -93,39 +93,43 @@ function PatientsPage() {
           </tr>
         </thead>
         <tbody>
-          {patients.map((patient, index) => (
-            <>
-              <tr key={patient.id}>
-                <th scope="row">{index + 1}</th>
-                <td>{patient.name}</td>
-                <td>{patient.surname}</td>
-                <td>{patient.dob}</td>
-                <td>{patient.address}</td>
-                <td>{patient.phone}</td>
-                <td>
-                  <Button color="primary" onClick={() => onEditButton(patient)}>
-                    Edit
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    color="danger"
-                    onClick={() =>
-                      client.models.Patient.delete({ id: patient.id })
-                    }
-                  >
-                    Delete
-                  </Button>
-                </td>
-              </tr>
-              <tr>
-                <td>{patient.bloodPressure}</td>
-                <td>{patient.odometerValue}</td>
-                <td>{patient.glucose}</td>
-                <td>{patient.bpm}</td>
-              </tr>
-            </>
-          ))}
+          {patients &&
+            patients.map((patient, index) => (
+              <>
+                <tr key={patient.id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>{patient.name}</td>
+                  <td>{patient.surname}</td>
+                  <td>{patient.dob}</td>
+                  <td>{patient.address}</td>
+                  <td>{patient.phone}</td>
+                  <td>
+                    <Button
+                      color="primary"
+                      onClick={() => onEditButton(patient)}
+                    >
+                      Edit
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      color="danger"
+                      onClick={() =>
+                        client.models.Patient.delete({ id: patient.id })
+                      }
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>{patient.bloodPressure}</td>
+                  <td>{patient.odometerValue}</td>
+                  <td>{patient.glucose}</td>
+                  <td>{patient.bpm}</td>
+                </tr>
+              </>
+            ))}
         </tbody>
       </Table>
 

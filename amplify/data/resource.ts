@@ -14,7 +14,7 @@ const schema = a.schema({
       dob: a.date(),
       address: a.string(),
       phone: a.string(),
-      patientId: a.string().required().default("123123123"),
+      patientId: a.string(),
       bloodPressure: a.string(),
       odometerValue: a.string(),
       glucose: a.string(),
