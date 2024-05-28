@@ -14,6 +14,7 @@ import {
   Row,
   Table,
 } from "reactstrap";
+import { nanoid } from "nanoid";
 
 const client = generateClient<Schema>();
 
@@ -44,7 +45,7 @@ function PatientsPage() {
       dob: "",
       address: "",
       phone: "",
-      patientId: nanoId(),
+      patientId: nanoid(),
     },
     onSubmit: (form) => {
       client.models.Patient.create(form);
@@ -93,32 +94,37 @@ function PatientsPage() {
         </thead>
         <tbody>
           {patients.map((patient, index) => (
-            <tr key={patient.id}>
-              <th scope="row">{index + 1}</th>
-              <td>{patient.name}</td>
-              <td>{patient.surname}</td>
-              <td>{patient.dob}</td>
-              <td>{patient.address}</td>
-              <td>{patient.phone}</td>
-              <td>
-                <Button color="primary" onClick={() => onEditButton(patient)}>
-                  Edit
-                </Button>
-              </td>
-              <td>
-                <Button
-                  color="danger"
-                  onClick={() =>
-                    client.models.Patient.delete({ id: patient.id })
-                  }
-                >
-                  Delete
-                </Button>
-              </td>
-              <td>
-                <Button>Show measurements</Button>
-              </td>
-            </tr>
+            <>
+              <tr key={patient.id}>
+                <th scope="row">{index + 1}</th>
+                <td>{patient.name}</td>
+                <td>{patient.surname}</td>
+                <td>{patient.dob}</td>
+                <td>{patient.address}</td>
+                <td>{patient.phone}</td>
+                <td>
+                  <Button color="primary" onClick={() => onEditButton(patient)}>
+                    Edit
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    color="danger"
+                    onClick={() =>
+                      client.models.Patient.delete({ id: patient.id })
+                    }
+                  >
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+              <tr>
+                <td>{patient.bloodPressure}</td>
+                <td>{patient.odometerValue}</td>
+                <td>{patient.glucose}</td>
+                <td>{patient.bpm}</td>
+              </tr>
+            </>
           ))}
         </tbody>
       </Table>
@@ -290,6 +296,3 @@ function PatientsPage() {
 }
 
 export default PatientsPage;
-function nanoId(): string {
-  throw new Error("Function not implemented.");
-}
