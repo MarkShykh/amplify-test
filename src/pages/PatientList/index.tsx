@@ -25,6 +25,8 @@ type TClientInfo = {
   phone: string;
 };
 
+type Patient = Schema["Patient"]["type"];
+
 function PatientsPage() {
   const [patients, setPatients] = useState<Array<Schema["Patient"]["type"]>>(
     []
@@ -32,9 +34,16 @@ function PatientsPage() {
 
   const [editPatientModal, setEditPatientModal] = useState<boolean>(false);
   const [patientModalOpen, setPatientModalOpen] = useState<boolean>(false);
-  const [editingPatient, setEditingPatient] =
-    useState<Schema["Patient"]["type"]>(null);
-
+  const initialPatient: Patient = {
+    name: "",
+    surname: "",
+    dob: "",
+    address: "",
+    phone: "",
+    id: "",
+    createdAt: "",
+    updatedAt: "",
+  };
   const formik = useFormik<TClientInfo>({
     initialValues: {
       name: "",
@@ -49,8 +58,9 @@ function PatientsPage() {
       formik.resetForm();
     },
   });
+  const [editingPatient, setEditingPatient] = useState<Patient>(initialPatient);
 
-  const onEditButton = (patient: Schema["Patient"]["type"]) => {
+  const onEditButton = (patient: Patient) => {
     setEditingPatient(patient);
     setEditPatientModal(true);
   };
