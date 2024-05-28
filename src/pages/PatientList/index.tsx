@@ -23,6 +23,7 @@ type TClientInfo = {
   dob: string;
   address: string;
   phone: string;
+  patientId: string;
 };
 
 type Patient = Schema["Patient"]["type"];
@@ -48,6 +49,7 @@ function PatientsPage() {
       dob: "",
       address: "",
       phone: "",
+      patientId: nanoId(),
     },
     onSubmit: (form) => {
       client.models.Patient.create(form);
@@ -86,6 +88,7 @@ function PatientsPage() {
             <th>Address</th>
             <th>Phone number</th>
             <th></th>
+            <th></th>
             <th>
               <Button onClick={() => setPatientModalOpen(true)} color="success">
                 Add
@@ -116,6 +119,9 @@ function PatientsPage() {
                 >
                   Delete
                 </Button>
+              </td>
+              <td>
+                <Button>Show measurements</Button>
               </td>
             </tr>
           ))}
@@ -300,3 +306,6 @@ function PatientsPage() {
 }
 
 export default PatientsPage;
+function nanoId(): string {
+  throw new Error("Function not implemented.");
+}

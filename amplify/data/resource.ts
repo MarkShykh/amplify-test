@@ -14,7 +14,8 @@ const schema = a.schema({
       dob: a.date(),
       address: a.string(),
       phone: a.string(),
-      measurements: a.hasOne("BioResults", "id"),
+      measurements: a.hasOne("BioResults", "bioresultId"),
+      patientId: a.string().required().default("123123123"),
     })
     .authorization((allow) => [allow.publicApiKey()]),
   BioResults: a
@@ -23,7 +24,8 @@ const schema = a.schema({
       odometerValue: a.string(),
       glucose: a.string(),
       bpm: a.string(),
-      patientId: a.belongsTo("Patient", "id"),
+      patientId: a.belongsTo("Patient", "patientId"),
+      bioresultId: a.string().required().default("123123123"),
     })
     .authorization((allow) => [allow.publicApiKey()]),
 });
