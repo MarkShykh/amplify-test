@@ -20,7 +20,7 @@ const schema = a.schema({
       glucose: a.string(),
       bpm: a.string(),
     })
-    .authorization((allow) => [allow.publicApiKey()]),
+    .authorization((allow) => [allow.authenticated()]),
 });
 
 export type Schema = ClientSchema<typeof schema>;
