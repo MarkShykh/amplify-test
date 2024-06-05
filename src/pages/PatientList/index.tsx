@@ -1,6 +1,6 @@
 import { generateClient } from "aws-amplify/api";
 import type { Schema } from "../../../amplify/data/resource";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { useFormik } from "formik";
 import {
   Button,
@@ -29,11 +29,15 @@ type TClientInfo = {
 
 type Patient = Schema["Patient"]["type"];
 
-function PatientsPage() {
+type TProps = {
+  token: string;
+};
+
+const PatientsPage: FC<TProps> = ({ token }) => {
   const [patients, setPatients] = useState<Array<Schema["Patient"]["type"]>>(
     []
   );
-
+  console.log(token);
   const [editPatientModal, setEditPatientModal] = useState<boolean>(false);
   const [patientModalOpen, setPatientModalOpen] = useState<boolean>(false);
 
@@ -300,6 +304,6 @@ function PatientsPage() {
       )}
     </div>
   );
-}
+};
 
 export default PatientsPage;

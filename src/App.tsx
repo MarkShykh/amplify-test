@@ -1,15 +1,15 @@
-import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import "@aws-amplify/ui-react/styles.css";
 import outputs from "../amplify_outputs.json";
 import { Hub } from "aws-amplify/utils";
-import { fetchAuthSession } from "aws-amplify/auth";
+import { AuthSession, fetchAuthSession } from "aws-amplify/auth";
 import PatientsPage from "./pages/PatientList";
+import Login from "./pages/Login";
 
 Amplify.configure(outputs);
 
 export default function App() {
-  let session = null;
+  let session: AuthSession = {};
 
   Hub.listen("auth", async ({ payload }) => {
     switch (payload.event) {
@@ -22,15 +22,8 @@ export default function App() {
 
   return (
     <>
-      <Authenticator>
-        {({ signOut, user }) => (
-          <main>
-            <h1>Hello {user?.username}</h1>
-            <button onClick={signOut}>Sign out</button>
-          </main>
-        )}
-      </Authenticator>
-      <PatientsPage />
+      <Login />
+      <PatientsPage token={session?.credentials?.accessKeyId || ""} />
     </>
   );
 }
